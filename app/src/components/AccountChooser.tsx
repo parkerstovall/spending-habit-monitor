@@ -6,7 +6,7 @@ export const AccountChooser = () => {
   const allAccounts = useAccountList()
   const { accounts, setAccounts } = useAccounts()
   return (
-    <div className="max-w-sm mt-10">
+    <div className="max-w-sm my-10">
       <FormControl fullWidth>
         <Autocomplete
           options={allAccounts}

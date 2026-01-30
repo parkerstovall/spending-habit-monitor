@@ -1,14 +1,23 @@
 import './App.css'
-import { AccountByDay } from './components/AccountByDay'
 import { AccountChooser } from './components/AccountChooser'
-import { AccountSummaries } from './components/AccountSummaries'
+import { AccountDetailView } from './components/AccountDetailView'
+import { useAccounts } from './context/account-context'
 
 export const App = () => {
-  return (
+  const { accounts } = useAccounts()
+  const prepare = async () => {
+    if (import.meta.env.DEV) {
+      const { worker } = await import('./mock/browser')
+      await worker.start()
+    }
+  }
+
+  return prepare().then(() => (
     <>
       <AccountChooser />
-      <AccountSummaries />
-      <AccountByDay />
+      {accounts.map((account) => {
+        return <AccountDetailView key={account.id} account={account} />
+      })}
     </>
-  )
+  ))
 }

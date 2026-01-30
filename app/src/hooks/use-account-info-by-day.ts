@@ -1,6 +1,6 @@
 import type { Account } from '../types'
 
-export const useAccountInfoByDay = (accounts: Account[]) => {
+export const useAccountInfoByDay = (accounts: Account) => {
   return [
     {
       accountId: 1,
@@ -53,5 +53,5 @@ export const useAccountInfoByDay = (accounts: Account[]) => {
         { date: '2024-10-12', income: 890, charges: 690 },
       ],
     },
-  ].filter((info) => accounts.some((account) => account.id === info.accountId))
+  ].find((info) => info.accountId === accounts.id)!.data
 }

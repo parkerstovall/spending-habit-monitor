@@ -1,6 +1,6 @@
 import type { Account } from '../types'
 
-export const useAccountTotals = (accounts: Account[]) => {
+export const useAccountTotals = (accounts: Account) => {
   return [
     {
       accountId: 1,
@@ -20,7 +20,5 @@ export const useAccountTotals = (accounts: Account[]) => {
       totalCharges: 4500,
       balance: 500,
     },
-  ].filter((total) =>
-    accounts.some((account) => account.id === total.accountId),
-  )
+  ].find((total) => total.accountId === accounts.id)!
 }

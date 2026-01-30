@@ -1,21 +1,14 @@
-import { Card, CardContent, CardHeader } from '@mui/material'
-import type { AccountTotal } from '../types'
+import type { Account } from '../types'
+import { useAccountTotals } from '../hooks/use-account-totals'
 
-export const AccountSummaryCard = ({
-  accountName,
-  accountTotal,
-}: {
-  accountName: string
-  accountTotal: AccountTotal
-}) => {
+export const AccountSummaryCard = ({ account }: { account: Account }) => {
+  const accountTotal = useAccountTotals(account)
+
   return (
-    <Card>
-      <CardHeader title={accountName} />
-      <CardContent>
-        <p className="font-bold text-lg">${accountTotal.balance}</p>
-        <p className="text-green-600">+ ${accountTotal.totalIncome}</p>
-        <p className="text-red-600">- ${accountTotal.totalCharges}</p>
-      </CardContent>
-    </Card>
+    <div>
+      <p className="font-bold text-lg">Balance: ${accountTotal.balance}</p>
+      <p className="text-green-600">Income: + ${accountTotal.totalIncome}</p>
+      <p className="text-red-600">Charges: - ${accountTotal.totalCharges}</p>
+    </div>
   )
 }
